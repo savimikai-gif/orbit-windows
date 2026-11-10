@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>ORBIT 3.0</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <section id="authView" class="auth-screen hidden" aria-label="Profile sign in">
+    <div class="auth-panel panel">
+      <div class="brand">◉ ORBIT / PERSONAL ASSISTANT</div>
+      <div class="auth-mark">◉</div>
+      <h1 id="authTitle" data-i18n="welcome">Welcome to Orbit.</h1>
+      <p id="authIntro" class="sub" data-i18n="localProfileIntro">Set up your local profile to personalize this PC.</p>
+      <form id="authForm" class="stack">
+        <label id="userLabel" for="authUsername" data-i18n="username">Username</label>
+        <input id="authUsername" type="text" maxlength="36" autocomplete="username" required>
+        <label for="authPassword" data-i18n="password">Password</label>
+        <input id="authPassword" type="password" minlength="8" maxlength="200" autocomplete="new-password" required>
+        <div id="confirmWrap"><label for="authConfirm" data-i18n="confirmPassword">Confirm password</label><input id="authConfirm" type="password" minlength="8" maxlength="200" autocomplete="new-password"></div>
+        <label class="checkbox-label"><input id="rememberMe" type="checkbox" checked><span data-i18n="rememberMe">Remember me on this computer</span></label>
+        <button id="authSubmit" class="primary full" type="submit" data-i18n="createProfile">Create profile</button>
+      </form>
+      <p id="authMessage" class="form-status" role="alert"></p>
+      <p class="fineprint" data-i18n="authNotice">Local convenience lock only. No cloud account or encryption of reminders. Do not use a sensitive password.</p>
+      <div class="auth-language"><button id="authLanguage" type="button" class="quiet">Română / English</button></div>
+    </div>
+  </section>
+
+  <div id="appView" class="app-shell hidden"><div class="ambient-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <aside class="sidebar">
+      <div class="logo"><span class="logo-icon">◉</span><div><strong>ORBIT</strong><small>PERSONAL ASSISTANT</small></div></div>
+      <div class="side-caption" data-i18n="workspace">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Sections">
+        <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">◫</span><span data-i18n="dashboard">Dashboard</span></button>
+        <button class="nav-btn" data-page="reminders"><span class="nav-icon">✓</span><span data-i18n="reminders">Reminders</span></button>
+        <button class="nav-btn" data-page="presets"><span class="nav-icon">▷</span><span data-i18n="presets">Presets</span></button>
+        <button class="nav-btn" data-page="timers"><span class="nav-icon">◴</span><span data-i18n="timers">Timers</span></button>
+        <button class="nav-btn" data-page="weather"><span class="nav-icon">☀</span><span data-i18n="weather">Weather</span></button>
+        <button class="nav-btn" data-page="system"><span class="nav-icon">▥</span><span data-i18n="systemMonitor">System monitor</span></button>
+        <button class="nav-btn" data-page="settings"><span class="nav-icon">⚙</span><span data-i18n="settings">Settings</span></button>
+      </nav>
+      <div class="sidebar-bottom"><span class="online-dot"></span><span data-i18n="desktopReady">Desktop online</span><small>v3.0 PREVIEW</small></div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar"><div><p class="breadcrumb">ORBIT <span>/</span> <span id="breadcrumbPage">Dashboard</span></p><h1 id="pageTitle" data-i18n="dashboard">Dashboard</h1><p class="sub" id="pageSubtitle" data-i18n="yourDay">Your space, your day.</p></div><div class="top-actions"><span class="clock" id="clock">--:--:--</span><button id="fullscreenBtn" type="button" class="outline-sm fullscreen-button" title="Fullscreen (F11)" aria-label="Toggle fullscreen">⛶ <span>F11</span></button><button id="topLanguage" class="outline-sm" title="Switch language" type="button">EN / RO</button><span class="avatar" id="userAvatar">U</span></div></header>
+
+
+
+      <section id="page-dashboard" class="page">
+        <section class="hero panel"><div class="hero-copy"><div class="eyebrow"><span class="online-dot"></span> <span data-i18n="systemReady">SYSTEM READY</span></div><h2 id="greeting">Welcome back.</h2><p id="nextHint" class="muted">Nothing scheduled right now.</p><div class="hero-actions">
+          <button class="primary" id="dashAdd" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg><span data-i18n="addReminder">Add reminder</span></button>
+          <button id="speakBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5ZM15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg><span data-i18n="hearOrbit">Hear Orbit</span></button>
+          </div></div><div class="hero-decoration" aria-hidden="true">
+              <svg class="jarvis-hud" viewBox="0 0 200 200" role="img" aria-label="ORBIT animated system core">
+                <defs><radialGradient id="orbit27-core" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f9fdff"/><stop offset="34%" stop-color="var(--accent)"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>
+                <g class="hud-spin-slow"><line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(0 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(5 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(10 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(15 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(20 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(25 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(30 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(35 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(40 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(45 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(50 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(55 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(60 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(65 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(70 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(75 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(80 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(85 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(90 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(95 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(100 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(105 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(110 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(115 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(120 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(125 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(130 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(135 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(140 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(145 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(150 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(155 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(160 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(165 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(170 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(175 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(180 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(185 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(190 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(195 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(200 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(205 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(210 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(215 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(220 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(225 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(230 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(235 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(240 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(245 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(250 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(255 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(260 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(265 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(270 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(275 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(280 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(285 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(290 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(295 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(300 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(305 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(310 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(315 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(320 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(325 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="14" stroke="currentColor" stroke-width="1.4" opacity="0.92" transform="rotate(330 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(335 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(340 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(345 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(350 100 100)"/>
+<line x1="100" y1="4" x2="100" y2="9" stroke="currentColor" stroke-width="0.6" opacity="0.48" transform="rotate(355 100 100)"/></g>
+                <g class="hud-spin"><circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="90 40 20 40" opacity=".85"/></g>
+                <circle cx="100" cy="100" r="72" fill="none" stroke="currentColor" stroke-width=".7" opacity=".55"/>
+                <g class="hud-spin-reverse"><circle cx="100" cy="100" r="64" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="4 6" opacity=".45"/><path d="M100 36 A64 64 0 0 1 164 100" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M100 164 A64 64 0 0 1 36 100" fill="none" stroke="currentColor" stroke-width="2.5"/></g>
+                <g class="hud-spin-fast"><circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="60 25 8 25"/><circle cx="100" cy="50" r="2.5" fill="currentColor"/></g>
+                <g class="hud-spin-slow"><path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(0 100 100)"/>
+<path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(60 100 100)"/>
+<path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(120 100 100)"/>
+<path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(180 100 100)"/>
+<path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(240 100 100)"/>
+<path d="M100 58 L104 64 L96 64 Z" fill="currentColor" opacity=".85" transform="rotate(300 100 100)"/></g>
+                <circle cx="100" cy="100" r="36" fill="none" stroke="currentColor" stroke-width="1" opacity=".7"/>
+                <g class="hud-spin"><circle cx="100" cy="100" r="30" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="30 17" opacity=".9"/></g>
+                <circle class="hud-pulse" cx="100" cy="100" r="24" fill="url(#orbit27-core)"/><circle cx="100" cy="100" r="9" fill="#f8fdff" opacity=".92"/>
+                <text x="100" y="196" text-anchor="middle" font-size="6" letter-spacing="3" fill="currentColor" opacity=".8">ORBIT · ONLINE</text>
+              </svg>
+            </div></section>
+        <div class="dashboard-grid">
+          <section class="panel dashboard-card"><div class="section-heading"><h2 data-i18n="upNext">Up next</h2><button class="text-btn" data-go="reminders" data-i18n="viewAll">View all →</button></div><div id="dashboardNext" class="next-item muted">No upcoming reminders.</div></section>
+          <section class="panel dashboard-card"><div class="section-heading"><h2 data-i18n="liveWeather">Live weather</h2><button class="text-btn" data-go="weather" data-i18n="details">Details →</button></div><div id="dashboardWeather" class="weather-mini muted">Search for a city to begin.</div></section>
+        </div>
+
+
+        <div class="dashboard-grid orbit28-grid">
+          <section class="panel dashboard-card lift-card"><div class="section-heading"><h2 data-i18n="agendaPreview">Today's reminders</h2><button class="text-btn" data-go="reminders" data-i18n="viewAll">View all →</button></div><div id="agendaDashboard" class="agenda-preview"></div></section>
+          <section class="panel dashboard-card lift-card"><div class="section-heading"><h2 data-i18n="timerPreview">Active timer</h2><button class="text-btn" data-go="timers" data-i18n="openTimers">Open timers →</button></div><div class="mini-timer"><span id="dashboardTimerDisplay" class="digital-mini">00:00</span><span id="dashboardTimerState" class="small muted" data-i18n="timerIdle">No timer running</span></div></section>
+        </div>
+        <section class="panel dashboard-card lift-card system-mini-card"><div class="section-heading"><h2 data-i18n="systemMonitor">System monitor</h2><button class="text-btn" data-go="system" data-i18n="details">Details →</button></div><div id="systemMini" class="metric-mini-grid"><div class="metric-tile"><span>CPU</span><strong id="cpuMini">—</strong></div><div class="metric-tile"><span>GPU</span><strong id="gpuMini">—</strong></div><div class="metric-tile"><span>RAM</span><strong id="ramMini">—</strong></div></div></section>
+        <section id="newsPanel" class="panel dashboard-card news-panel lift-card"><div class="section-heading"><div><h2 data-i18n="latestNews">Google News · Headlines</h2><p class="small muted" data-i18n="newsInlineInfo">Read headlines here without leaving ORBIT.</p></div><button type="button" id="newsRefresh" class="outline-sm" data-i18n="refresh">Refresh</button></div><div id="newsStatus" class="small muted" role="status"></div><div id="newsFeed" class="news-feed" aria-label="Scrollable news headlines"></div><p class="small muted news-credit">Source: Google News RSS · Headlines and publisher attribution</p></section>
+        <section id="quickWebPanel" class="panel dashboard-card quick-web-panel">
+          <div class="section-heading"><div><h2 data-i18n="quickWeb">Quick web</h2><p class="small muted quick-web-hint" data-i18n="defaultBrowserNote">Opens in your Windows default browser.</p></div><span class="pill">WEB</span></div>
+          <form id="googleSearchForm" class="web-search"><label class="sr-only" for="googleSearchInput" data-i18n="googleSearch">Search Google</label><input id="googleSearchInput" autocomplete="off" maxlength="250" data-placeholder="googleSearchHint" placeholder="Search Google…" aria-label="Search Google"><button type="submit" class="primary" data-i18n="search">Search</button></form>
+          <div id="quickWebLinks" class="quick-web-links" aria-label="Website shortcuts"></div>
+        </section>
+        <section class="panel dashboard-card"><div class="section-heading"><h2 data-i18n="quickLaunch">Quick launch</h2><button class="text-btn" data-go="presets" data-i18n="manage">Manage →</button></div><div id="dashboardPresets" class="quick-presets muted">Your saved application profiles will appear here.</div></section>
+      </section>
+
+
+      <section id="page-timers" class="page hidden">
+        <section class="panel timer-section"><div class="section-heading"><div><h2 data-i18n="timers">Timers</h2><p class="small muted" data-i18n="timersDescription">Countdown and stopwatch live together here.</p></div><span class="pill" data-i18n="runsInTray">Works while ORBIT runs</span></div>
+          <div class="timer-tabs" role="tablist" aria-label="Timer type"><button id="countdownTab" role="tab" aria-selected="true" class="active" type="button" data-i18n="countdown">Countdown</button><button id="stopwatchTab" role="tab" aria-selected="false" type="button" data-i18n="stopwatch">Stopwatch</button></div>
+          <div id="countdownPane" class="timer-pane"><div class="timer-display" id="countdownDisplay" aria-live="off">05:00</div><div class="timer-set"><label for="countdownMinutes" data-i18n="minutes">Minutes</label><input id="countdownMinutes" type="number" min="0" max="999" value="5" inputmode="numeric"><label for="countdownSeconds" data-i18n="seconds">Seconds</label><input id="countdownSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></div><div class="timer-presets"><button type="button" data-minutes="5">5 min</button><button type="button" data-minutes="15">15 min</button><button type="button" data-minutes="25">25 min</button><button type="button" data-minutes="45">45 min</button></div><div class="timer-actions"><button id="countdownStart" class="primary" type="button" data-i18n="start">Start</button><button id="countdownPause" type="button" data-i18n="pause">Pause</button><button id="countdownReset" type="button" data-i18n="reset">Reset</button></div><p id="countdownStatus" class="small muted" role="status"></p></div>
+          <div id="stopwatchPane" class="timer-pane hidden"><div id="stopwatchDisplay" class="timer-display" aria-live="off">00:00.00</div><div class="timer-actions"><button id="stopwatchStart" class="primary" type="button" data-i18n="start">Start</button><button id="stopwatchPause" type="button" data-i18n="pause">Pause</button><button id="stopwatchLap" type="button" data-i18n="lap">Lap</button><button id="stopwatchReset" type="button" data-i18n="reset">Reset</button></div><ol id="stopwatchLaps" class="laps-list"></ol></div>
+        </section>
+      </section>
+      <section id="page-system" class="page hidden"><section class="panel"><div class="section-heading"><div><h2 data-i18n="systemMonitor">System monitor</h2><p class="small muted" data-i18n="systemDescription">Windows performance snapshot · approximate Task Manager values</p></div><button id="systemRefresh" class="outline-sm" type="button" data-i18n="refresh">Refresh</button></div><div class="resource-grid"><article class="resource-card"><div class="resource-label">CPU <strong id="cpuValue">—</strong></div><div class="resource-track"><span id="cpuBar"></span></div></article><article class="resource-card"><div class="resource-label">GPU <strong id="gpuValue">—</strong></div><div class="resource-track"><span id="gpuBar"></span></div></article><article class="resource-card"><div class="resource-label">RAM <strong id="ramValue">—</strong></div><div class="resource-track"><span id="ramBar"></span></div><p class="small muted" id="ramDetails"></p></article></div><p class="small muted" id="systemStatus" role="status" data-i18n="systemDesktopOnly">Live Windows metrics are available in the desktop app.</p><p class="small muted" data-i18n="gpuNote">GPU uses Windows GPU Engine counters where available; the percentage may differ from Task Manager.</p></section></section>
+      <section id="page-reminders" class="page hidden">
+        <div class="two-col">
+          <section class="panel"><div class="section-heading"><h2 id="taskFormHeading" data-i18n="addReminder">Add reminder</h2><span class="pill" data-i18n="localOnly">On this PC</span></div><form id="taskForm" class="stack">
+            <label for="taskText" data-i18n="taskName">Reminder</label><input id="taskText" maxlength="100" placeholder="What do you need to do?" required data-placeholder="taskPlaceholder">
+            <div class="reminder-picker" aria-label="Reminder date and time">
+              <label data-i18n="dateAndTime">Date and time</label>
+              <div class="date-shortcuts" role="group" aria-label="Quick reminder dates">
+                <button type="button" data-quick-date="0" data-i18n="today">Today</button>
+                <button type="button" data-quick-date="1" data-i18n="tomorrow">Tomorrow</button>
+                <button type="button" data-quick-date="7" data-i18n="nextWeek">Next week</button>
+              </div>
+              <div class="calendar-box">
+                <div class="calendar-heading"><button id="calendarPrev" type="button" class="calendar-arrow" aria-label="Previous month">‹</button><strong id="calendarTitle"></strong><button id="calendarNext" type="button" class="calendar-arrow" aria-label="Next month">›</button></div>
+                <div id="calendarWeekdays" class="calendar-weekdays"></div>
+                <div id="calendarDays" class="calendar-days"></div>
+              </div>
+              <div class="time-control">
+                <div class="section-heading time-heading"><label for="taskTime" data-i18n="time">Time</label><span id="dateSummary" aria-live="polite"></span></div>
+                <div class="time-shortcuts" role="group" aria-label="Quick reminder times">
+                  <button type="button" data-time-offset="15" data-i18n="in15Minutes">+15 min</button>
+                  <button type="button" data-time-offset="60" data-i18n="in1Hour">+1 hour</button>
+                  <button type="button" data-quick-time="09:00" data-i18n="morning">Morning 09:00</button>
+                  <button type="button" data-quick-time="18:00" data-i18n="evening">Evening 18:00</button>
+                </div>
+                <div class="time-input-row"><button type="button" id="timeMinus" class="time-step" aria-label="15 minutes earlier">−</button><input id="taskTime" type="time" required step="60" aria-label="Custom reminder time"><button type="button" id="timePlus" class="time-step" aria-label="15 minutes later">+</button><span data-i18n="customTimeHint" class="small muted">Or choose a precise time</span></div>
+              </div>
+              <input id="taskDate" type="hidden">
+            </div>
+            <div class="form-split"><div><label for="repeat" data-i18n="repeat">Repeat</label><select id="repeat"><option value="once" data-i18n="once">Does not repeat</option><option value="daily" data-i18n="daily">Every day</option><option value="weekdays" data-i18n="weekdays">Weekdays</option><option value="custom" data-i18n="customDays">Select days</option></select></div></div>
+            <div id="days" class="repeat-days hidden" aria-label="Repeat on selected days"></div>
+            <div class="actions"><button id="saveTaskBtn" class="primary" type="submit" data-i18n="addReminder">Add reminder</button><button id="cancelTaskEdit" type="button" class="hidden" data-i18n="cancel">Cancel</button></div>
+          </form></section>
+          <section class="panel"><h2 data-i18n="quickActions">Quick actions</h2><p class="muted small" data-i18n="tasksLocal">Your reminders stay on this PC. Export a backup whenever you like.</p><div class="actions"><button id="notifyBtn" data-i18n="enableNotifications">Enable notifications</button><button id="clearDone" data-i18n="clearCompleted">Clear completed</button><button id="exportBtn" data-i18n="exportBackup">Export backup</button><button id="importBtn" type="button" data-i18n="importBackup">Import 2.8 backup</button></div><div class="notice" data-i18n="reminderNotice">Orbit currently checks reminders while the app is running. Notifications are not guaranteed when Windows is shut down or the app is suspended.</div></section>
+        </div><section class="panel spaced"><div class="section-heading"><h2 data-i18n="yourReminders">Your reminders</h2><span id="taskCount" class="pill">0</span></div><div id="taskList" class="list"></div></section>
+      </section>
+
+      <section id="page-presets" class="page hidden"><div class="two-col">
+        <section class="panel"><div class="section-heading"><h2 id="presetFormHeading" data-i18n="createPreset">Create a preset</h2><span class="pill">WINDOWS</span></div><form id="presetForm" class="stack"><label for="presetName" data-i18n="presetName">Preset name</label><input id="presetName" maxlength="65" placeholder="CS2 Competitive" required><label data-i18n="selectedApps">Selected applications</label><div id="selectedApps" class="selected-apps muted"></div><div class="actions"><button id="browseAppBtn" type="button" class="outline" data-i18n="browseApps">Browse files…</button><button id="refreshInstalledBtn" type="button" class="outline" data-i18n="findInstalled">Find installed apps</button></div><div class="installed-area"><label for="appSearch" data-i18n="searchApps">Search Start Menu shortcuts</label><input id="appSearch" placeholder="Steam, Discord, Minecraft…" data-placeholder="searchAppsPlaceholder"><div id="installedList" class="installed-list muted"></div></div><div class="actions"><button id="savePresetBtn" type="submit" class="primary" data-i18n="savePreset">Save preset</button><button id="cancelPresetEdit" type="button" class="hidden" data-i18n="cancel">Cancel</button></div></form></section>
+        <section class="panel"><div class="section-heading"><h2 data-i18n="yourPresets">Your presets</h2><span id="presetCount" class="pill">0</span></div><div id="presetList" class="list"></div><p class="muted small" data-i18n="presetHint">Pick installed shortcuts or browse for .exe/.lnk files. No manual paths needed.</p></section></div></section>
+
+      <section id="page-weather" class="page hidden"><div class="two-col"><section class="panel"><div class="section-heading"><h2 data-i18n="chooseCity">Choose a city</h2><span class="pill">OPEN-METEO</span></div><form id="cityForm" class="search-row"><input id="cityInput" placeholder="Search any city worldwide" autocomplete="off" data-placeholder="cityPlaceholder" required><button class="primary" type="submit" data-i18n="search">Search</button></form><div id="cityResults" class="city-results"></div><p class="muted small" data-i18n="cityHint">Select a city from the results to save it as your default.</p></section><section class="panel"><div class="section-heading"><h2 data-i18n="currentWeather">Current conditions</h2><button id="refreshWeather" type="button" data-i18n="refresh">Refresh</button></div><div id="weatherDetails" class="weather-display muted">Search for a location to see current conditions.</div><div id="weatherForecast" class="forecast"></div><p class="small muted">Data: Open-Meteo.com · <span data-i18n="weatherInternet">Requires internet.</span></p></section></div></section>
+
+      <section class="page hidden" id="page-settings"><div class="settings-columns"><div class="settings-column"><section class="panel"><h2 data-i18n="preferences">Preferences</h2><div class="stack"><label data-i18n="language" for="languageSelect">Language</label><select id="languageSelect"><option value="en">English</option><option value="ro">Română</option></select><label data-i18n="voiceEngine" for="voiceEngine">Speech engine</label>
+<select id="voiceEngine"><option data-i18n="systemEngine" value="system">Windows voice · offline</option><option data-i18n="azureEngine" value="azure">Microsoft neural voices · online</option></select>
+<div aria-live="polite" class="voice-status" id="neuralStatus" role="status"></div>
+<div class="stack hidden voice-cloud-config" id="azureControls">
+<div class="voice-cloud-heading"><span class="pill">NEURAL SPEECH</span><span class="small muted" data-i18n="azurePrivate">Your key is encrypted locally on this Windows account.</span></div>
+<label data-i18n="azureRegion" for="azureRegion">Azure Speech region</label><input autocomplete="off" id="azureRegion" maxlength="40" placeholder="e.g. westeurope" spellcheck="false"/>
+<label data-i18n="azureKey" for="azureKey">Azure Speech resource key</label><input autocomplete="off" id="azureKey" placeholder="Enter your own key (optional)" spellcheck="false" type="password"/>
+<div class="actions"><button class="primary" data-i18n="azureSave" id="azureSave" type="button">Save neural voice settings</button><button data-i18n="azureClear" id="azureClear" type="button">Remove saved key</button></div>
+<label data-i18n="azureVoice" for="azureVoice">Neural voice</label><select id="azureVoice"><option value="auto">Automatic (match language)</option><option value="en-US-AndrewNeural">Andrew · English</option><option value="en-US-AvaNeural">Ava · English</option><option value="ro-RO-EmilNeural">Emil · Română</option><option value="ro-RO-AlinaNeural">Alina · Română</option></select>
+<p class="small muted" data-i18n="azureNotice">Online voice requires an Azure Speech resource and may have costs. No subscription is included.</p>
+</div>
+<div class="stack" id="systemVoiceControls"><label data-i18n="voice" for="voiceSelect">Orbit voice</label><select id="voiceSelect"><option value="">System default</option></select></div>
+<label for="voiceSpeed"><span data-i18n="speakingSpeed">Speaking speed</span> <span class="field-value" id="rateValue">0.92×</span></label>
+<div class="orbit-slider-track" style="--range-pct:35%"><input class="orbit-edge-slider" id="voiceSpeed" max="1.15" min="0.75" step="0.05" type="range"/></div>
+<div class="stack" id="voicePitchControls"><label for="voicePitch"><span data-i18n="voicePitch">Voice pitch</span> <span class="field-value" id="pitchValue">1.0</span></label>
+<div class="orbit-slider-track" style="--range-pct:35%"><input class="orbit-edge-slider" id="voicePitch" max="1.2" min="0.75" step="0.05" type="range"/></div></div>
+<label for="voiceVolume"><span data-i18n="voiceVolume">Voice volume</span> <output class="field-value" for="voiceVolume" id="voiceVolumeValue">35%</output></label>
+<div class="orbit-slider-track" style="--range-pct:35%"><input aria-label="Voice volume" class="orbit-edge-slider" id="voiceVolume" max="100" min="0" step="5" type="range" value="35"/></div>
+<p class="small muted" data-i18n="voiceVolumeNote">Controls Orbit speech only, not Windows volume.</p>
+<label class="checkbox-label"><input id="speakReminders" type="checkbox"/><span data-i18n="speakReminders">Read reminders aloud</span></label>
+<div class="actions"><button class="primary voice-preview" data-i18n="testVoice" id="testVoice" type="button">Test voice</button><button data-i18n="reloadVoices" id="reloadVoices" type="button">Refresh voice list</button></div>
+<p class="small muted" data-i18n="voiceNote30">Offline Romanian speech requires a Romanian voice installed in Windows; online neural works with a configured Azure key.</p>
+</div></section></div><div class="settings-column"><section class="panel"><h2 data-i18n="profileAndApp">Profile &amp; app</h2><div class="stack"><div class="profile-row"><div class="avatar large" id="settingsAvatar">U</div><div><strong id="settingsUsername">User</strong><p class="muted small" data-i18n="deviceProfile">Local profile on this Windows device</p></div></div><label class="checkbox-label"><input id="startupToggle" type="checkbox"/><span data-i18n="startWindows">Launch Orbit when Windows starts</span></label><p class="small muted" data-i18n="startupNote">Optional. Best tested with the installed release, not development mode.</p><label class="checkbox-label"><input id="minimizeTrayToggle" type="checkbox"/><span data-i18n="closeToTray">Close window to system tray</span></label><p class="small muted" data-i18n="trayNote">When enabled, use the tray menu to quit Orbit. Reminders still depend on the app running.</p><div class="actions"><button data-i18n="signOut" id="lockBtn" type="button">Sign out</button><button class="danger" data-i18n="forgetSignIn" id="logoutAllBtn" type="button">Forget automatic sign-in</button></div><div class="notice" data-i18n="profileNotice">This is a local profile, not cloud authentication. Passwords are hashed, but locally stored reminders are not encrypted.</div></div></section><section class="panel appearance-panel"><div class="section-heading"><div><h2 data-i18n="appearance">Appearance</h2><p class="small muted appearance-intro" data-i18n="appearanceHint">Customize the look of Orbit. Changes apply immediately and are saved on this PC.</p></div><button class="text-btn" data-i18n="resetAppearance" id="resetAppearance" type="button">Reset look</button></div>
+<div class="appearance-grid"><div class="stack"><label data-i18n="accentColor">Accent color</label><div aria-label="Accent color" class="accent-choices" id="accentChoices" role="group">
+<button aria-label="Blue" class="color-choice" data-accent-choice="blue" style="--chip:#64a8ff" title="Blue" type="button"></button>
+<button aria-label="Purple" class="color-choice" data-accent-choice="purple" style="--chip:#b18bff" title="Purple" type="button"></button>
+<button aria-label="Teal" class="color-choice" data-accent-choice="teal" style="--chip:#48d6ca" title="Teal" type="button"></button>
+<button aria-label="Amber" class="color-choice" data-accent-choice="amber" style="--chip:#f3b75c" title="Amber" type="button"></button>
+<button aria-label="Rose" class="color-choice" data-accent-choice="rose" style="--chip:#ff90b2" title="Rose" type="button"></button>
+</div><div class="appearance-note muted small" data-i18n="accentNote">The dark ORBIT layout stays readable with every accent.</div></div>
+<div class="stack"><label data-i18n="surfaceStyle" for="surfaceStyle">Panel style</label><select id="surfaceStyle"><option data-i18n="styleClassic" value="classic">Classic navy</option><option data-i18n="styleGlass" value="glass">Soft glass</option><option data-i18n="styleFlat" value="flat">Minimal flat</option></select>
+<label class="checkbox-label"><input id="compactMode" type="checkbox"/><span data-i18n="compactMode">Compact layout</span></label><label class="checkbox-label"><input checked="" id="showQuickWeb" type="checkbox"/><span data-i18n="showQuickWeb">Show quick web shortcuts on dashboard</span></label></div></div>
+</section><section class="panel cloud-panel"><div class="section-heading"><div><h2>ORBIT Cloud</h2><p class="small muted">Sync reminders and appearance between Windows and iPhone.</p></div><span class="pill">PC ↔ PHONE</span></div>
+<div class="stack"><p class="notice" id="cloudStatus" role="status">Cloud not configured</p>
+<div class="cloud-connection"><div class="cloud-connection-fields"><div><label for="cloudProjectUrl">Supabase Project URL</label><input id="cloudProjectUrl" type="url" autocomplete="off" spellcheck="false" placeholder="https://project.supabase.co"></div><div><label for="cloudPublishableKey">Supabase Publishable Key</label><input id="cloudPublishableKey" type="password" autocomplete="off" spellcheck="false" placeholder="sb_publishable_… (public key)"></div></div><button id="cloudSaveConfig" type="button">Save connection</button><p class="small muted">Enter the same Supabase project used by ORBIT Mobile. Never enter a secret / service-role key here.</p></div><form class="stack" id="cloudForm"><label for="cloudEmail">Cloud email</label><input autocomplete="email" id="cloudEmail" placeholder="you@example.com" required="" type="email"/><label for="cloudPassword">Cloud password</label><input autocomplete="current-password" id="cloudPassword" minlength="8" required="" type="password"/><div class="actions"><button class="primary" type="submit">Sign in</button><button id="cloudSignUp" type="button">Create cloud account</button></div></form><div class="actions"><button id="cloudSyncNow" type="button">Sync now</button><button id="cloudSignOut" type="button">Disconnect cloud</button></div><p class="small muted">Uses separate cloud authentication. Your Windows local profile stays unchanged. Reminders sync while ORBIT is running.</p></div></section></div></div></section>
+      <footer class="foot">ORBIT 3.0 PREVIEW <span>·</span> <span data-i18n="footerTag">Built to keep things simple.</span></footer>
+    </main>
+  </div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
