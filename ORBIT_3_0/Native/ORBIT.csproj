@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ORBIT</AssemblyName>
+    <RootNamespace>ORBIT</RootNamespace>
+    <Version>3.0.0</Version>
+    <FileVersion>3.0.0.0</FileVersion>
+    <ApplicationIcon>..\Assets\icon.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="10.0.13" />
+    <EmbeddedResource Include="..\Web\index.html" LogicalName="orbit/index.html" />
+    <EmbeddedResource Include="..\Web\src\style.css" LogicalName="orbit/src/style.css" />
+    <EmbeddedResource Include="..\Web\src\main.js" LogicalName="orbit/src/main.js" />
+    <EmbeddedResource Include="..\Web\src\native-bridge.js" LogicalName="orbit/src/native-bridge.js" />
+    <EmbeddedResource Include="..\Web\src\cloud-sync.js" LogicalName="orbit/src/cloud-sync.js" />
+    <EmbeddedResource Include="..\Web\src\cloud-config.js" LogicalName="orbit/src/cloud-config.js" />
+  </ItemGroup>
+</Project>
