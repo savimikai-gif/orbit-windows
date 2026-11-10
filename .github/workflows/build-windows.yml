@@ -1,0 +1,44 @@
+name: Build ORBIT 3.0 for Windows
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'Native/**'
+      - 'Web/**'
+      - 'Assets/**'
+      - 'Installer/**'
+      - '.github/workflows/build-windows.yml'
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Publish self-contained ORBIT.exe
+        shell: pwsh
+        run: |
+          dotnet publish Native/ORBIT.csproj -c Release -r win-x64 --self-contained true -o Publish -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true
+          if (!(Test-Path 'Publish/ORBIT.exe')) { throw 'ORBIT.exe was not created.' }
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup --yes --no-progress
+      - name: Build installer
+        shell: pwsh
+        run: |
+          $possible = @("${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe", "$env:ProgramFiles\Inno Setup 6\ISCC.exe")
+          $compiler = $possible | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (!$compiler) { throw 'Inno Setup compiler not found.' }
+          & $compiler Installer/ORBIT.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Installer compilation failed.' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ORBIT-3.0-Windows
+          path: |
+            Publish/ORBIT.exe
+            Release/ORBIT_3_0_Setup.exe
+          if-no-files-found: error
